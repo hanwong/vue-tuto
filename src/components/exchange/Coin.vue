@@ -20,7 +20,7 @@
           align="middle"
         >
           <el-col :span="16">
-            <el-input v-model="quantity"></el-input>
+            <el-input v-model.number="quantity"></el-input>
           </el-col>
           <el-col :span="6">
             <el-button @click="buyCoin">Buy</el-button>
