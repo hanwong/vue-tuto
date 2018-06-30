@@ -1,15 +1,112 @@
 <template>
   <div>
-    <h1>Coin</h1>
+    <el-col :span="8">
+      <el-card class="coin">
+        <div slot="header">
+          {{ propCoin.name }}
+          <span 
+            class="coin-change" 
+            :class="{'plus': changeRate > 0, 'minus': changeRate < 0, 'no-change': changeRate == 0}"
+          >
+            {{ Math.abs(changeRate) }}
+          </span>
+          <span class="coin-price">
+            {{ propCoin.price }}
+          </span>
+        </div>
+        <el-row
+          type="flex"
+          justify="space-between"
+          align="middle"
+        >
+          <el-col :span="16">
+            <el-input v-model="quantity"></el-input>
+          </el-col>
+          <el-col :span="6">
+            <el-button @click="buyCoin">Buy</el-button>
+          </el-col>
+        </el-row>
+      </el-card>
+    </el-col>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Coin'
+  name: 'Coin',
+  props: ['propCoin'],
+  data() {
+    return {
+      quantity: 0
+    }
+  },
+  methods: {
+    buyCoin () {
+      const order = {
+        coinId: this.propCoin.id,
+        coinPrice: this.propCoin.price,
+        quantity: this.quantity
+      }
+      console.log(order)
+      this.quantity = 0
+    }
+  },
+  computed: {
+    changeRate () {
+      return (((this.propCoin.exPrice - this.propCoin.price) / this.propCoin.price)*100).toFixed(2)
+    }
+  }
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.coin {
+  margin-bottom: 10px;
+  .coin-price,
+  .coin-change {
+    display: block;
+    float: right;
+  }
+  .coin-change {
+    padding-left: 15px;
+    font-size: 13px;
+    &::before {
+      content: '';
+      display: inline-block;
+      box-sizing: border-box;
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 8px solid rgba(22, 159, 250, 0.932);
+      transform: translate(-5px);
+    }
+    &.plus {
+      color: rgba(22, 159, 250, 0.932);
+    }
+    &.minus {
+      color: #f06292;
+      &::before {
+        border-top: 8px solid #f06292;
+        border-bottom: 5px solid transparent;
+        transform: translate(-5px, 5px);
+      }
+    }
+    &.no-change {
+      color: #999;
+      &::before {
+        border-top: 1px solid #999;
+        border-bottom: 1px solid #999;
+        border-left: 5px solid #999;
+        border-right: 5px solid #999;
+        transform: translate(-5px, -4px);
+      }
+    }
+  }
+}
+.el-button {
+  padding: 10px 0;
+  width: 100%;
+  text-align: center;
+}
 </style>

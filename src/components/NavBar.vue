@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-menu :default-active="activeIndex" class="navbar" mode="horizontal" router="true" @select="handleSelect">
+    <el-menu :default-active="activeIndex" class="navbar" mode="horizontal" :router="true" @select="handleSelect">
       <el-menu-item index="1" route="/">CryptoVue </el-menu-item>
       <el-menu-item index="2" route="/exchange">Exchange</el-menu-item>
       <el-menu-item index="3" route="/wallet">Wallet</el-menu-item>
