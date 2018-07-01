@@ -2,11 +2,11 @@
   <div>
     <h1>Exchange</h1>
     <el-row :gutter="10">
-      <Coin :propCoin="{id: 1, name: 'BTC', price: 700, exPrice: 725}"/>
-      <Coin :propCoin="{id: 1, name: 'BTC', price: 700, exPrice: 625}"/>
-      <Coin :propCoin="{id: 1, name: 'BTC', price: 700, exPrice: 700}"/>
-      <Coin :propCoin="{id: 1, name: 'BTC', price: 700, exPrice: 625}"/>
-      <Coin :propCoin="{id: 1, name: 'BTC', price: 700, exPrice: 625}"/>
+      <Coin 
+        v-for="coin in coins"
+        :key="coin.id"
+        :propCoin="coin"
+      />
     </el-row>
   </div>
 </template>
@@ -18,6 +18,11 @@ export default {
   name: 'Exchange',
   components: {
     Coin
+  },
+  computed: {
+    coins () {
+      return this.$store.getters.coins
+    }
   }
 }
 </script>
