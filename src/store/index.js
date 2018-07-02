@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import coins from './modules/coins'
+import exchange from './modules/exchange'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    coins
+    exchange
   }
 })
