@@ -6,13 +6,14 @@
         v-for="coin in coins"
         :key="coin.id"
         :propCoin="coin"
+        :propStatus="'exchange'"
       />
     </el-row>
   </div>
 </template>
 
 <script>
-import Coin from './Coin'
+import Coin from '../common/Coin'
 
 export default {
   name: 'Exchange',

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-col :span="8">
-      <el-card class="coin">
+      <el-card class="coin" :class="{'my-coin': propStatus === 'wallet'}">
         <div slot="header">
           {{ propCoin.name }}
           <span 
@@ -20,10 +20,17 @@
           align="middle"
         >
           <el-col :span="16">
-            <el-input v-model.number="quantity"></el-input>
+            <el-input-number 
+              v-model.number="quantity"
+              :min="0"
+            >
+            </el-input-number>
           </el-col>
-          <el-col :span="6">
+          <el-col v-if="propStatus === 'exchange'" :span="6">
             <el-button @click="buyCoin">Buy</el-button>
+          </el-col>
+          <el-col v-if="propStatus === 'wallet'" :span="6">
+            <el-button @click="sellCoin">Sell</el-button>
           </el-col>
         </el-row>
       </el-card>
@@ -34,7 +41,7 @@
 <script>
 export default {
   name: 'Coin',
-  props: ['propCoin'],
+  props: ['propCoin', 'propStatus'],
   data() {
     return {
       quantity: 0
@@ -49,6 +56,14 @@ export default {
       }
       console.log(order)
       this.quantity = 0
+    },
+    sellCoin () {
+      const order = {
+        coinId: this.propCoin.id,
+        coinPrice: this.propCoin.price,
+        quantity: this.quantity
+      }
+      console.log(order)
     }
   },
   computed: {
@@ -62,6 +77,11 @@ export default {
 <style lang="scss">
 .coin {
   margin-bottom: 10px;
+  &.my-coin {
+    .el-card__header {
+      background-color: #D1E7FE;
+    }
+  }
   .coin-price,
   .coin-change {
     display: block;
