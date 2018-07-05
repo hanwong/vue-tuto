@@ -13,7 +13,7 @@ const mutations = {
 }
 
 const actions = {
-  buyCoins: ({commit}, order) => {
+  buyCoin: ({commit}, order) => {
     commit()
   },
   initCoins: ({commit}) => {
