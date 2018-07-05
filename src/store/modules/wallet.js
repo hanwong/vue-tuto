@@ -41,7 +41,8 @@ const getters = {
         id: coin.id,
         quantity: coin.quantity,
         name: record.name,
-        price: record.price
+        price: record.price,
+        exPrice: record.exPrice
       }
     })
   },
