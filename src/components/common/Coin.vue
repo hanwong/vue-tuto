@@ -50,12 +50,10 @@ export default {
     }
   },
   methods: {
-    methods: {
-      ...mapActions({
-        'buyOrder': 'buyCoin',
-        'sellOrder': 'sellCoin'
-      })
-    },
+    ...mapActions({
+      'buyOrder': 'buyCoin',
+      'sellOrder': 'sellCoin'
+    }),
     buyCoin () {
       const order = {
         coinId: this.propCoin.id,
