@@ -14,18 +14,17 @@
 
 <script>
 import Coin from '../common/Coin'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Wallet',
   components: {
     Coin
   },
-  data() {
-    return {
-      coins: [
-        {id: 5, name: 'STEEM', price: 1800, exPrice: 1700}
-      ]
-    }
+  computed: {
+    ...mapGetters({
+      'coins': 'coinWallet'
+    })
   }
 }
 </script>

@@ -14,6 +14,7 @@
 
 <script>
 import Coin from '../common/Coin'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Exchange',
@@ -21,9 +22,9 @@ export default {
     Coin
   },
   computed: {
-    coins () {
-      return this.$store.getters.coins
-    }
+    ...mapGetters([
+      'coins'
+    ])
   }
 }
 </script>

@@ -20,17 +20,36 @@
           align="middle"
         >
           <el-col :span="16">
-            <el-input-number 
+            <el-input-number
+              v-if="propStatus === 'exchange'"
               v-model.number="quantity"
               :min="0"
+              :max="funds / propCoin.price"
+            >
+            </el-input-number>
+            <el-input-number
+              v-if="propStatus === 'wallet'"
+              v-model.number="quantity"
+              :min="0"
+              :max="propCoin.quantity"
             >
             </el-input-number>
           </el-col>
-          <el-col v-if="propStatus === 'exchange'" :span="6">
-            <el-button @click="buyCoin">Buy</el-button>
-          </el-col>
-          <el-col v-if="propStatus === 'wallet'" :span="6">
-            <el-button @click="sellCoin">Sell</el-button>
+          <el-col :span="6">
+            <el-button 
+              v-if="propStatus === 'exchange'"
+              @click="buyCoin"
+              :disabled="quantity === 0"
+            >
+              Buy
+            </el-button>
+            <el-button
+              v-if="propStatus === 'wallet'"
+              @click="sellCoin"
+              :disabled="quantity === 0"
+            >
+              Sell
+            </el-button>
           </el-col>
         </el-row>
       </el-card>
@@ -39,7 +58,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Coin',
