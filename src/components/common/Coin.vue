@@ -93,6 +93,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'funds'
+    ]),
     changeRate () {
       return (((this.propCoin.exPrice - this.propCoin.price) / this.propCoin.price)*100).toFixed(2)
     }
