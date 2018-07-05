@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Coin',
   props: ['propCoin', 'propStatus'],
@@ -48,13 +50,19 @@ export default {
     }
   },
   methods: {
+    methods: {
+      ...mapActions({
+        'buyOrder': 'buyCoin',
+        'sellOrder': 'sellCoin'
+      })
+    },
     buyCoin () {
       const order = {
         coinId: this.propCoin.id,
         coinPrice: this.propCoin.price,
         quantity: this.quantity
       }
-      console.log(order)
+      this.buyOrder(order)
       this.quantity = 0
     },
     sellCoin () {
@@ -63,7 +71,8 @@ export default {
         coinPrice: this.propCoin.price,
         quantity: this.quantity
       }
-      console.log(order)
+      this.sellOrder(order)
+      this.quantity = 0
     }
   },
   computed: {
