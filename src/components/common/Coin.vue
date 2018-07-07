@@ -3,6 +3,9 @@
     <el-col :span="8">
       <el-card class="coin" :class="{'my-coin': propStatus === 'wallet'}">
         <div slot="header">
+          <span class="coin-quatity" v-if="propStatus === 'wallet'">
+            {{ propCoin.quantity.toFixed(2) }}
+          </span>
           {{ propCoin.name }}
           <span 
             class="coin-change" 
@@ -110,6 +113,9 @@ export default {
     .el-card__header {
       background-color: #D1E7FE;
     }
+  }
+  .coin-quatity {
+    color: #777;
   }
   .coin-price,
   .coin-change {
