@@ -9,6 +9,10 @@ const mutations = {
     state.coins = coins
   },
   'RND_COINS' (state) {
+    state.coins.forEach( coin => {
+      coin.exPrice = coin.price
+      coin.price = Math.round(coin.price * (1 + Math.random() * (0.09 - 0.01) - 0.01))
+    })
   }
 }
 

@@ -9,7 +9,7 @@
           {{ propCoin.name }}
           <span 
             class="coin-change" 
-            :class="{'plus': changeRate > 0, 'minus': changeRate < 0, 'no-change': changeRate == 0}"
+            :class="{'plus': changeRate < 0, 'minus': changeRate > 0, 'no-change': changeRate == 0}"
           >
             {{ Math.abs(changeRate) }}
           </span>
