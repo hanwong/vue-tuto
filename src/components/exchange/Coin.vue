@@ -8,7 +8,7 @@
             class="coin-change" 
             :class="{'plus': changeRate > 0, 'minus': changeRate < 0, 'no-change': changeRate == 0}"
           >
-            {{ Math.abs(changeRate) }}
+            {{ Math.abs(changeRate) }}%
           </span>
           <span class="coin-price">
             {{ propCoin.price }}
@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     changeRate () {
-      return (((this.propCoin.exPrice - this.propCoin.price) / this.propCoin.price)*100).toFixed(2)
+      return (((this.propCoin.price - this.propCoin.exPrice) / this.propCoin.price)*100).toFixed(2)
     }
   }
 }
@@ -78,16 +78,16 @@ export default {
       height: 0;
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
-      border-bottom: 8px solid rgba(22, 159, 250, 0.932);
+      border-bottom: 8px solid #f06292;
       transform: translate(-5px);
     }
     &.plus {
-      color: rgba(22, 159, 250, 0.932);
+      color: #f06292;
     }
     &.minus {
-      color: #f06292;
+      color: #169df7ee;
       &::before {
-        border-top: 8px solid #f06292;
+        border-top: 8px solid #169df7ee;
         border-bottom: 5px solid transparent;
         transform: translate(-5px, 5px);
       }
