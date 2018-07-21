@@ -9,13 +9,13 @@
         <el-menu-item index="save">Save</el-menu-item>
         <el-menu-item index="load">Load</el-menu-item>
       </el-submenu>
-      <el-menu-item
-        class="navbar-menu navbar-menu__right"
+      <li
+        class="el-menu-item navbar-menu navbar-menu__right"
         @click="refreshCoins"
       >
         Refresh
-      </el-menu-item>
-      <el-menu-item index="4" class="navbar-menu navbar-menu__right">총 자산: {{ funds | KRW }}</el-menu-item>
+      </li>
+      <li index="4" class="el-menu-item navbar-menu navbar-menu__right">총 자산: {{ funds | KRW }}</li>
     </el-menu>
   </div>
 </template>
@@ -25,6 +25,20 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'NavBar',
+  beforeMount () {
+    const currentPage = this.$route.name
+    switch (currentPage) {
+      case 'Exchange':
+        this.activeIndex = '2'
+        break
+      case 'Wallet':
+        this.activeIndex = '3'
+        break
+      default:
+        this.activeIndex = '1'
+        break
+    }
+  },
   data() {
     return {
       activeIndex: '1'
@@ -39,7 +53,7 @@ export default {
     ...mapActions([
       'randomizeCoins'
     ]),
-    refreshCoins () {
+    refreshCoins (event) {
       this.randomizeCoins()
     }
   }
